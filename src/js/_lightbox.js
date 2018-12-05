@@ -48,11 +48,19 @@ function closeModalHandler(modal) {
 function setStyleAttributes(el,styleObj) {
   for (const prop in styleObj) {
     if (prop == 'image') {
-      el.src = `${API.images}/${styleObj[prop]}`;
+      const image = selectRandomImage(styleObj[prop]);
+      el.src = `${API.images}/${image}`;
     } else {
       el.style[prop] = styleObj[prop];
     }
   }
+}
+
+function selectRandomImage(imageString) {
+  const imageArr = imageString.split(',');
+  const imageCount = imageArr.length;
+  
+  return imageArr[Math.floor(Math.random() * imageCount)]
 }
 
 //get christmas script src
