@@ -31,7 +31,7 @@ function modalController(modal,modalImg) {
   const modalStyle = {
     background: styles.background
   }
-  
+
   setStyleAttributes(modalImg, styles);
   setStyleAttributes(modal, modalStyle);
   animateSnow();
@@ -76,7 +76,7 @@ function mergeStyleObject(styleObj, queries) {
     const [property, value] = el.split('=');
 
     if (property === 'bg') {
-      return styleObj['background'] = `#${value}`;
+      return styleObj['background'] = `${value}`;
     }
     return styleObj[property] = value;
   });

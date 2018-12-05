@@ -85,7 +85,7 @@ function init() {
         let x = Math.floor(Math.random() * canvas.width),
             y = Math.floor(Math.random() * canvas.height),
             size = (Math.random() * 3) + 2,
-            speed = (Math.random() * 1) + 0.5,
+            speed = (Math.random() * 1) + 1.5,
             opacity = (Math.random() * 0.5) + 0.3;
 
         flakes.push({
