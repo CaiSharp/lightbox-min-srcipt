@@ -1,0 +1,51 @@
+{
+  "name": "webpack",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development --watch",
+    "watch:sass": "node-sass-chokidar ./src/sass/main.scss ./dist/css/main.css -w",
+    "compile:sass": "node-sass ./src/sass/main.scss ./dist/css/style.css",
+    "prefix:css": "postcss ./dist/css/style.css --replace",
+    "compress:css": "node-sass ./dist/css/style.css --output-style compressed --replace",
+    "build:css": "npm-run-all compile:sass prefix:css compress:css"
+  },
+  "devDependencies": {
+    "@babel/core": "7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-transform-typescript": "^7.1.0",
+    "@babel/preset-env": "7.1.0",
+    "@babel/preset-typescript": "^7.1.0",
+    "autoprefixer": "9.3.1",
+    "babel-loader": "8.0.4",
+    "babel-preset-minify": "^0.5.0",
+    "browser-sync": "^2.26.3",
+    "browser-sync-webpack-plugin": "^2.2.2",
+    "clean-webpack-plugin": "0.1.19",
+    "concat": "^1.0.3",
+    "css-loader": "1.0.1",
+    "cssnano": "^4.1.7",
+    "file-loader": "^2.0.0",
+    "html-webpack-plugin": "3.2.0",
+    "image-webpack-loader": "^4.4.0",
+    "mini-css-extract-plugin": "0.4.4",
+    "node-sass": "4.9.4",
+    "node-sass-chokidar": "^1.3.4",
+    "npm-run-all": "^4.1.3",
+    "postcss-cli": "^6.0.1",
+    "postcss-loader": "^3.0.0",
+    "rucksack-css": "^1.0.2",
+    "sass-loader": "7.1.0",
+    "source-map-loader": "^0.2.4",
+    "style-loader": "0.23.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.1.4",
+    "webpack": "4.23.1",
+    "webpack-cli": "3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0"
+  }
+}
