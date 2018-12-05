@@ -10,7 +10,6 @@ if (!document.cookie.split(';').filter(item => item.includes('christmas=')).leng
 
   const modal = document.querySelector('.modal');
   const modalImg = document.querySelector('.modal__image');
-  const closeBtn = document.querySelector('.modal__close');
 
   modalController(modal, modalImg);
 }
@@ -29,7 +28,12 @@ function modalController(modal,modalImg) {
     mergeStyleObject(styles, queries);
   }
 
+  const modalStyle = {
+    background: styles.background
+  }
+  
   setStyleAttributes(modalImg, styles);
+  setStyleAttributes(modal, modalStyle);
   animateSnow();
 }
 
