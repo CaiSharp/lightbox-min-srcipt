@@ -1,6 +1,7 @@
 import template from './util/_templates';
 import styles from './util/_styles';
 import API from './util/_api';
+import animateSnow from './_snow';
 
 //check if cookie is set
 if (!document.cookie.split(';').filter(item => item.includes('christmas=')).length) {
@@ -14,6 +15,10 @@ if (!document.cookie.split(';').filter(item => item.includes('christmas=')).leng
   modalController(modal, modalImg);
 }
 
+/*----------------------------------
+------------------------------------
+----------------------------------*/
+
 function modalController(modal,modalImg) {
   //setStyleAttributes(modalImg, styles);
   closeModalHandler(modal);
@@ -25,6 +30,7 @@ function modalController(modal,modalImg) {
   }
 
   setStyleAttributes(modalImg, styles);
+  animateSnow();
 }
 
 function closeModalHandler(modal) {

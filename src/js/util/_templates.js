@@ -1,5 +1,6 @@
 const template = /*html*/ `
-  <div class="modal" 
+  <div 
+  class="modal"  
   style="
   position: fixed; 
   height: 100%; 
@@ -9,7 +10,15 @@ const template = /*html*/ `
   left: 0;
   "
   >
-    <img class="modal__image" 
+    <canvas 
+    id="canvas"
+    style="
+    z-index: 99999;
+    pointer-event: none;
+    "
+    ></canvas>
+    <img 
+    class="modal__image" 
     style="
     position: absolute; 
     display: block; 
@@ -30,8 +39,7 @@ const template = /*html*/ `
     font-weight: bold;
     color: white;
     ">x</button>
-    </div>
-  </div>
+</div>
 `
 
 export default template;
