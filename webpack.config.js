@@ -11,7 +11,7 @@ module.exports = {
 	entry: ['@babel/polyfill', './src/app.ts'],
 	output: {
 		path: path.resolve(__dirname, 'dist'),
-		filename: './js/bundle.js'
+		filename: './js/christmas.js'
 	},
 	devServer: {
 		contentBase: './dist/',

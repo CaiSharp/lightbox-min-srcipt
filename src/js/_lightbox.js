@@ -3,8 +3,9 @@ import styles from './util/_styles';
 import API from './util/_api';
 import animateSnow from './_snow';
 
-//check if cookie is set
-if (!document.cookie.split(';').filter(item => item.includes('christmas=')).length) {
+
+//check if cookie is set && expiration date is reached
+if (!document.cookie.split(';').filter(item => item.includes('christmas=')).length && checkExpirationDate()) {
   //create lightbox with background
   document.querySelector('body').insertAdjacentHTML('beforeend', template);
 
@@ -15,8 +16,26 @@ if (!document.cookie.split(';').filter(item => item.includes('christmas=')).leng
 }
 
 /*----------------------------------
-------------------------------------
+--FUNCTIONS
 ----------------------------------*/
+
+//checks for date query in script
+function checkExpirationDate() {
+  const queries = getQueries(getScriptSrc());
+  //extract query
+  let expirationDate = queries.find(el => el.includes('date')).split('=')[1];
+
+  if (expirationDate) {
+    const dateNow = new Date().getTime();
+    expirationDate = Date.parse(new Date(expirationDate));
+  
+    if (dateNow <= expirationDate) {
+      return true
+    }
+    return false
+  }
+  return true
+}
 
 function modalController(modal,modalImg) {
   //setStyleAttributes(modalImg, styles);
@@ -69,12 +88,14 @@ function getScriptSrc() {
   const queryScript = scripts.find(el => {
     return el.src.includes('christmas');
   });
+
   return queryScript.src;
 }
 
 function getQueries(scriptSrc) {
   let queries = scriptSrc.split('?')[1];
   queries = queries.split('&');
+
   return queries;
 }
 
