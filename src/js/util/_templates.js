@@ -38,8 +38,8 @@ const template = /*html*/ `
       class="christmas--modal__close"
       style="
       position: absolute;
-      top: 15px;
-      right: 15px;
+      top: -35px;
+      right: 0;
       background: none;
       border: none;
       font-size: 24px;
