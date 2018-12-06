@@ -17,28 +17,36 @@ const template = /*html*/ `
     pointer-event: none;
     "
     ></canvas>
-    <img 
-    class="christmas--modal__image" 
+    <div
+    class="christmas--modal__container"
     style="
     position: absolute; 
     display: block; 
     transform: translate(-50%,-50%); 
     top: 50%; 
     left: 50%;
-    ">
-    
-    <button 
-    class="christmas--modal__close"
-    style="
-    position: absolute;
-    top: 15px;
-    left: 20px;
-    background: none;
-    border: none;
-    font-size: 24px;
-    font-weight: bold;
-    color: white;
-    ">x</button>
+    "
+    >
+      <img 
+      class="christmas--modal__image" 
+      style="
+      width: 100%;
+      height: auto;
+      "
+      >
+      <button 
+      class="christmas--modal__close"
+      style="
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      ">x</button>
+    </div>
 </div>
 `
 

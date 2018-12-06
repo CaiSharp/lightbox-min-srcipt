@@ -11,8 +11,9 @@ if (!document.cookie.split(';').filter(item => item.includes('christmas=')).leng
 
   const modal = document.querySelector('.christmas--modal');
   const modalImg = document.querySelector('.christmas--modal__image');
+  const modalContainer = document.querySelector('.christmas--modal__container');
 
-  modalController(modal, modalImg);
+  modalController(modal, modalImg,modalContainer);
 }
 
 /*----------------------------------
@@ -38,8 +39,7 @@ function checkExpirationDate() {
   return true
 }
 
-function modalController(modal,modalImg) {
-  //setStyleAttributes(modalImg, styles);
+function modalController(modal,modalImg,modalContainer) {
   closeModalHandler(modal);
 
   const queries = getQueries(getScriptSrc());
@@ -53,7 +53,7 @@ function modalController(modal,modalImg) {
     'z-index': (+styles['z-index'] + 1)
   }
 
-  setStyleAttributes(modalImg, styles);
+  setStyleAttributes(modalContainer, styles, modalImg);
   setStyleAttributes(modal, modalStyle);
   animateSnow();
 }
@@ -66,11 +66,16 @@ function closeModalHandler(modal) {
 }
 
 //sets inline styles for given Object
-function setStyleAttributes(el,styleObj) {
+function setStyleAttributes(el,styleObj,elImage) {
   for (const prop in styleObj) {
     if (prop == 'image') {
       const image = selectRandomImage(styleObj[prop]);
-      el.src = `${API.images}/${image}`;
+
+      if (elImage) {
+        elImage.src = `${API.images}/${image}`;
+      } else {
+        el.src = `${API.images}/${image}`;
+      }
     } else {
       el.style[prop] = styleObj[prop];
     }

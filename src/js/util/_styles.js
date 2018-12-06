@@ -1,9 +1,9 @@
 const styles = {
   background: 'rgba(0, 0, 0, 0.7)',
-  'max-width': '90%',
+  width: '100%',
   height: 'auto',
-  'max-height': '100%',
-  'z-index': 99999
+  'z-index': 99999,
+  'max-width': '90%'
 }
 
 export default styles;
