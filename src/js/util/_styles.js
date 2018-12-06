@@ -3,6 +3,7 @@ const styles = {
   'max-width': '90%',
   height: 'auto',
   'max-height': '100%',
+  'z-index': 99999
 }
 
 export default styles;

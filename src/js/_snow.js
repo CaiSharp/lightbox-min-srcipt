@@ -9,7 +9,7 @@ function animateSnow() {
 
 
 let flakes = [],
-    canvas = document.getElementById("canvas"),
+    canvas = document.getElementById("christmas--canvas"),
     ctx = canvas.getContext("2d"),
     flakeCount = 400,
     mX = -100,

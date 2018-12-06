@@ -9,8 +9,8 @@ if (!document.cookie.split(';').filter(item => item.includes('christmas=')).leng
   //create lightbox with background
   document.querySelector('body').insertAdjacentHTML('beforeend', template);
 
-  const modal = document.querySelector('.modal');
-  const modalImg = document.querySelector('.modal__image');
+  const modal = document.querySelector('.christmas--modal');
+  const modalImg = document.querySelector('.christmas--modal__image');
 
   modalController(modal, modalImg);
 }
@@ -26,6 +26,7 @@ function checkExpirationDate() {
   let expirationDate = queries.find(el => el.includes('date')).split('=')[1];
 
   if (expirationDate) {
+    //convert to numeric values for comparison
     const dateNow = new Date().getTime();
     expirationDate = Date.parse(new Date(expirationDate));
   
@@ -48,7 +49,8 @@ function modalController(modal,modalImg) {
   }
 
   const modalStyle = {
-    background: styles.background
+    background: styles.background,
+    'z-index': (+styles['z-index'] + 1)
   }
 
   setStyleAttributes(modalImg, styles);

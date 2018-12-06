@@ -1,6 +1,6 @@
 const template = /*html*/ `
   <div 
-  class="modal"  
+  class="christmas--modal"  
   style="
   position: fixed; 
   height: 100%; 
@@ -8,17 +8,17 @@ const template = /*html*/ `
   background-color: rgba(0,0,0,0.8);
   top: 0;
   left: 0;
+  z-index: 99999;
   "
   >
     <canvas 
-    id="canvas"
+    id="christmas--canvas"
     style="
-    z-index: 99999;
     pointer-event: none;
     "
     ></canvas>
     <img 
-    class="modal__image" 
+    class="christmas--modal__image" 
     style="
     position: absolute; 
     display: block; 
@@ -28,7 +28,7 @@ const template = /*html*/ `
     ">
     
     <button 
-    class="modal__close"
+    class="christmas--modal__close"
     style="
     position: absolute;
     top: 15px;
