@@ -13,30 +13,31 @@ if (!document.cookie.split(';').filter(item => item.includes('christmas=')).leng
   const modalImg = document.querySelector('.christmas--modal__image');
   const modalContainer = document.querySelector('.christmas--modal__container');
 
-  modalController(modal, modalImg,modalContainer);
+  modalController(modal, modalImg, modalContainer);
+
+  //add resize event to window && load smaller image when <576px
+  window.addEventListener('resize', () => {
+    setResponsiveImg(modalImg);
+  })
 }
 
 /*----------------------------------
 --FUNCTIONS
 ----------------------------------*/
-
-//checks for date query in script
-function checkExpirationDate() {
+function setResponsiveImg(el) {
+  const width = document.documentElement.clientWidth;
+  const breakpoint = 576;
   const queries = getQueries(getScriptSrc());
-  //extract query
-  let expirationDate = queries.find(el => el.includes('date')).split('=')[1];
 
-  if (expirationDate) {
-    //convert to numeric values for comparison
-    const dateNow = new Date().getTime();
-    expirationDate = Date.parse(new Date(expirationDate));
-  
-    if (dateNow <= expirationDate) {
-      return true
-    }
-    return false
+  //extract query
+  let responsiveImg = queries.find(el => el.includes('responsive')).split('=')[1];
+
+  if (width <= breakpoint) {
+    el.src = `${API.images}/${responsiveImg}`;
   }
-  return true
+  if (width > breakpoint) {
+    el.src = el.dataset.image;
+  }
 }
 
 function modalController(modal,modalImg,modalContainer) {
@@ -55,6 +56,7 @@ function modalController(modal,modalImg,modalContainer) {
 
   setStyleAttributes(modalContainer, styles, modalImg);
   setStyleAttributes(modal, modalStyle);
+  setResponsiveImg(modalImg);
   animateSnow();
 }
 
@@ -70,11 +72,14 @@ function setStyleAttributes(el,styleObj,elImage) {
   for (const prop in styleObj) {
     if (prop == 'image') {
       const image = selectRandomImage(styleObj[prop]);
+      const srcUrl = `${API.images}/${image}`;
 
       if (elImage) {
-        elImage.src = `${API.images}/${image}`;
+        elImage.src = srcUrl;
+        elImage.dataset.image = srcUrl;
       } else {
-        el.src = `${API.images}/${image}`;
+        el.src = srcUrl;
+        el.dataset.image = srcUrl;
       }
     } else {
       el.style[prop] = styleObj[prop];
@@ -122,4 +127,23 @@ function mergeStyleObject(styleObj, queries) {
 function setCookie(lifetime = 86400) {
   const expirationDate = new Date(new Date().getTime() + (+lifetime * 1000));
   document.cookie = `christmas=true;expires=${expirationDate}`;
+}
+
+//checks for date query in script
+function checkExpirationDate() {
+  const queries = getQueries(getScriptSrc());
+  //extract query
+  let expirationDate = queries.find(el => el.includes('date')).split('=')[1];
+
+  if (expirationDate) {
+    //convert to numeric values for comparison
+    const dateNow = new Date().getTime();
+    expirationDate = Date.parse(new Date(expirationDate));
+  
+    if (dateNow <= expirationDate) {
+      return true
+    }
+    return false
+  }
+  return true
 }
