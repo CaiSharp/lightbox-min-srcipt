@@ -14,23 +14,21 @@ if (!document.cookie.split(';').filter(item => item.includes('christmas=')).leng
   const modalContainer = document.querySelector('.christmas--modal__container');
 
   modalController(modal, modalImg, modalContainer);
-
-  //add resize event to window && load smaller image when <576px
-  window.addEventListener('resize', () => {
-    setResponsiveImg(modalImg);
-  })
 }
 
 /*----------------------------------
 --FUNCTIONS
 ----------------------------------*/
-function setResponsiveImg(el) {
+function setResponsiveImg(el, queries) {
   const width = document.documentElement.clientWidth;
-  const breakpoint = 576;
-  const queries = getQueries(getScriptSrc());
-
+  let breakpoint = 1024;
+  
   //extract query
-  let responsiveImg = queries.find(el => el.includes('responsive')).split('=')[1];
+  const responsiveImg = queries.find(el => el.includes('responsive')).split('=')[1];
+
+  if (queries.find(el => el.includes('bp'))) {
+    breakpoint = queries.find(el => el.includes('bp')).split('=')[1];
+  }
 
   if (width <= breakpoint) {
     el.src = `${API.images}/${responsiveImg}`;
@@ -56,8 +54,16 @@ function modalController(modal,modalImg,modalContainer) {
 
   setStyleAttributes(modalContainer, styles, modalImg);
   setStyleAttributes(modal, modalStyle);
-  setResponsiveImg(modalImg);
   animateSnow();
+
+  if (queries.find(el => el.includes('responsive'))) {
+    //set responsive image
+    setResponsiveImg(modalImg, queries);
+    //add resize event to window && load smaller image when <576px
+    window.addEventListener('resize', () => {
+      setResponsiveImg(modalImg, queries);
+    })
+  }
 }
 
 function closeModalHandler(modal) {
